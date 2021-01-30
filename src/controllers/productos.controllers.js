@@ -634,7 +634,6 @@ productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 				]
 			};
 		}
-
 		await Producto.aggregate(
 			[
 				{
@@ -644,6 +643,9 @@ productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 						foreignField: 'productoPromocion',
 						as: 'promocion'
 					}
+				},
+				{ 
+					$sort: { createdAt: -1 } 
 				},
 				{
 					$match: match
@@ -707,7 +709,7 @@ productosCtrl.getProductosFiltroTemporada = async (req,res) => {
 }
 
 productosCtrl.getProductosFiltrados = async (req, res) => {
-	const { nombre, categoria, subcategoria, genero, color } = req.query;
+	const { nombre, categoria, subcategoria, genero, color, temporada } = req.query;
 	try {
 		await Producto.aggregate(
 			[
@@ -726,7 +728,8 @@ productosCtrl.getProductosFiltrados = async (req, res) => {
 							{ categoria: { $regex: '.*' + categoria + '.*', $options: 'i' } },
 							{ subCategoria: { $regex: '.*' + subcategoria + '.*', $options: 'i' } },
 							{ genero: { $regex: '.*' + genero + '.*', $options: 'i' } },
-							{ color: { $regex: '.*' + color + '.*', $options: 'i' } }
+							{ color: { $regex: '.*' + color + '.*', $options: 'i' } },
+							{ temporada: { $regex: '.*' + temporada + '.*', $options: 'i' } }
 						],
 						$and: [ { $or: [ { eliminado: { $exists: false } }, { eliminado: false } ] } ]
 					}
@@ -750,7 +753,7 @@ productosCtrl.getProductosFiltrados = async (req, res) => {
 };
 
 productosCtrl.getProductosFiltradosAdmin = async (req, res) => {
-	const { codigo, nombre, categoria, subcategoria, genero, color } = req.query;
+	const { codigo, nombre, categoria, subcategoria, genero, color , temporada} = req.query;
 	try {
 		await Producto.aggregate(
 			[
@@ -770,7 +773,8 @@ productosCtrl.getProductosFiltradosAdmin = async (req, res) => {
 							{ categoria: { $regex: '.*' + categoria + '.*', $options: 'i' } },
 							{ subCategoria: { $regex: '.*' + subcategoria + '.*', $options: 'i' } },
 							{ genero: { $regex: '.*' + genero + '.*', $options: 'i' } },
-							{ color: { $regex: '.*' + color + '.*', $options: 'i' } }
+							{ color: { $regex: '.*' + color + '.*', $options: 'i' } },
+							{ temporada: { $regex: '.*' + temporada + '.*', $options: 'i' } }
 						],
 						$and: [ { $or: [ { eliminado: { $exists: false } }, { eliminado: false } ] } ]
 					}

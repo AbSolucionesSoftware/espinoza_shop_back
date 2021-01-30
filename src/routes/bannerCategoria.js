@@ -11,7 +11,8 @@ const {
     editSubBanner,
     deleteSubCanner,
     publishedBanner,
-    getBannersAdmin
+    getBannersAdmin,
+    getBanner
 } = require('../controllers/bannerCategoria');
 
 router.route('/')
@@ -20,7 +21,7 @@ router.route('/')
 
 router.route('/admin/').get(auth,getBannersAdmin)
 
-router.route('/:idBanner').put(auth,subirImagen,agregateBanner).delete(auth,deleteBanner);
+router.route('/:idBanner').put(auth,subirImagen,agregateBanner).delete(auth,deleteBanner).get(getBanner);
 
 router.route('/:idBanner/action/:idSubBanner').put(auth,subirImagen,editSubBanner).delete(auth,deleteSubCanner);
 
