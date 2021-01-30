@@ -47,12 +47,12 @@ adminCtrl.createAdmin = async (req, res) => {
 										_id: newAdmin._id,
 										rol: newAdmin.rol
 									},
-									"HiXYE@Ay%39e;",
+									process.env.AUTH_KEY,
 						/* 			{
 										expiresIn : '1h'
 									} */);
 									//token
-									//res.json(token);
+									res.status(200).json(token);
 								}
 							}
 						});
