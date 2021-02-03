@@ -518,6 +518,7 @@ productosCtrl.getProductoSinPaginacion = async (req, res) => {
 
 productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 	try {
+		console.log();
 		const { categoria = '', subcategoria = '', genero = '', temporada = '' } = req.query;
 		var match = {};
 
@@ -612,6 +613,7 @@ productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 				]
 			};
 		} else if (!categoria && !subcategoria && genero && !temporada ) {
+			console.log("Entro genero");
 			match = {
 				$or: [ { eliminado: { $exists: false } }, { eliminado: false } ],
 				$and: [
@@ -632,6 +634,11 @@ productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 				$and: [
 					{ temporada: { $regex: '.*' + temporada + '.*', $options: 'i' } },
 				]
+			};
+		}else{
+			console.log("Entro ultima");
+			match = {
+				$or: [ { eliminado: { $exists: false } }, { eliminado: false } ]
 			};
 		}
 		await Producto.aggregate(
