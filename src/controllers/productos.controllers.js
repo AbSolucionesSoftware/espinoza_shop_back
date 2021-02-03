@@ -614,7 +614,6 @@ productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 				]
 			};
 		} else if (!categoria && !subcategoria && genero && !temporada ) {
-			console.log("Entro genero");
 			match = {
 				$or: [ { eliminado: { $exists: false } }, { eliminado: false } ],
 				$and: [
@@ -637,7 +636,6 @@ productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 				]
 			};
 		}else{
-			console.log("Entro ultima");
 			match = {
 				$or: [ { eliminado: { $exists: false } }, { eliminado: false } ]
 			};
