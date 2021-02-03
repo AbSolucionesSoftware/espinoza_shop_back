@@ -516,6 +516,7 @@ productosCtrl.getProductoSinPaginacion = async (req, res) => {
 	}
 };
 
+
 productosCtrl.getProductosFiltrosDividos = async (req, res) => {
 	try {
 		console.log();
