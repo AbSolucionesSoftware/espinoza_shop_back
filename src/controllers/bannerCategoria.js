@@ -77,7 +77,8 @@ bannerCtrl.publishedBanner = async (req,res) => {
 
 bannerCtrl.agregateBanner = async (req,res) => {
     try {
-        const {orientacion,vincular,mostrarProductos,mostrarTitulo,categoria,temporada} = req.body;
+        const {orientacion,vincular,mostrarProductos,mostrarTitulo,categoria,temporada,genero} = req.body;
+        console.log(req.body);
         const banner = {
             tipo: {}
         };
@@ -95,6 +96,9 @@ bannerCtrl.agregateBanner = async (req,res) => {
         }
         if(temporada){
             banner.tipo.temporada = temporada;
+        }
+        if(genero){
+            banner.tipo.genero = genero;
         }
         await modelBanner.updateOne(
             {
@@ -132,7 +136,7 @@ bannerCtrl.editSubBanner = async (req,res) => {
         console.log(req.body);
         console.log(req.file);
         banners.map(async (bannerBase) => {
-            const { orientacion ,vincular ,mostrarProductos ,mostrarTitulo , categoria, temporada} = req.body;
+            const { orientacion ,vincular ,mostrarProductos ,mostrarTitulo , categoria, temporada,genero} = req.body;
             
             const newBanner = {
                 tipo: {}
@@ -156,6 +160,9 @@ bannerCtrl.editSubBanner = async (req,res) => {
             }
             if(temporada){
                 newBanner.tipo.temporada = temporada;
+            }
+            if(genero){
+                newBanner.tipo.genero = genero;
             }
             console.log(newBanner);
             await modelBanner.updateOne(

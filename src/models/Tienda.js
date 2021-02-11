@@ -26,7 +26,7 @@ const TiendaSchema = new Schema({
         }
     ],
     telefono: {
-        type: Number,
+        type: String,
         required: true
     },
     ubicacion: [{
@@ -47,7 +47,8 @@ const TiendaSchema = new Schema({
     politicasVentas: String,
     politicasEnvios: String,
     politicasDescuentos: String,
-    politicasDevolucion: String
+    politicasDevolucion: String,
+    diasHorariosEmpresas: String,
 });
 
 module.exports = model('tienda', TiendaSchema);

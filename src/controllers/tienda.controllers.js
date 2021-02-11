@@ -14,7 +14,7 @@ tiendaCtrl.subirImagen = async (req,res,next) => {
 
 tiendaCtrl.crearTienda = async (req, res) => {
     console.log(req.body);
-    const {nombre,telefono,calle_numero,cp,colonia,ciudad,lat,lng,imagenCorp,linkFace,linkInsta,linkTweeter,estado} = req.body;
+    const {nombre,telefono,calle_numero,cp,colonia,ciudad,imagenCorp,linkFace,linkInsta,linkTweeter,estado, diasHorariosEmpresas} = req.body;
     let phone = "";
     if(telefono){
         phone = telefono.trim(" ");
@@ -32,14 +32,11 @@ tiendaCtrl.crearTienda = async (req, res) => {
             ciudad:ciudad,
             estado:estado
         }],
-        ubicacion:[{
-            lat:lat,
-            lng:lng
-        }],
         imagenCorp:imagenCorp,
         linkFace:linkFace,
         linkInsta:linkInsta,
-        linkTweeter:linkTweeter
+        linkTweeter:linkTweeter,
+        diasHorariosEmpresas: diasHorariosEmpresas
     });
     newTienda.activo = true;
     if(req.file){
@@ -76,7 +73,7 @@ tiendaCtrl.obtenerTienda = async (req, res) => {
 };
 
 tiendaCtrl.actualizarTienda = async (req, res) => {
-    const {nombre,telefono,calle_numero,cp,colonia,ciudad,lat,lng,politicas,imagenCorp,linkFace,linkInsta,linkTweeter,estado} = req.body;
+    const {nombre,telefono,calle_numero,cp,colonia,ciudad,lat,lng,politicas,imagenCorp,linkFace,linkInsta,linkTweeter,estado,diasHorariosEmpresas} = req.body;
     const infoTiendaBase =  await Tienda.findById(req.params.idTienda);
     const newTienda = {
         nombre: nombre,
@@ -96,7 +93,8 @@ tiendaCtrl.actualizarTienda = async (req, res) => {
         imagenCorp:imagenCorp,
         linkFace:linkFace,
         linkInsta:linkInsta,
-        linkTweeter:linkTweeter
+        linkTweeter:linkTweeter,
+        diasHorariosEmpresas:diasHorariosEmpresas
     };
     console.log(req.file);
     if(req.file){
